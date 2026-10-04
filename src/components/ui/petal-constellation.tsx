@@ -21,6 +21,8 @@ interface Petal {
   size: number;
   angle: number;
   spin: number;
+  /** px/s de caída en modo táctil */
+  fall: number;
   flip: number;
   phase: number;
   tone: number;
@@ -101,6 +103,8 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
     if (!ctx) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    // en celular y tablet no hay cursor: los pétalos caen despacio por su cuenta, sin reaccionar al dedo
+    const touchOnly = window.matchMedia('(hover: none), (pointer: coarse)').matches;
     const sprites = TONES.map(makeSprite);
 
     let animationFrameId = 0;
@@ -142,6 +146,7 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
             size: Math.random() * 6 + 9,
             angle: Math.random() * Math.PI * 2,
             spin: (Math.random() - 0.5) * 0.3,
+            fall: Math.random() * 8 + 6,
             flip: Math.random() * Math.PI * 2,
             phase: Math.random() * Math.PI * 2,
             tone: pickTone(),
@@ -174,18 +179,6 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
       mouse.lastReal = performance.now();
     };
 
-    // en celular el navegador se queda con el toque para hacer scroll; el dedo se lee aparte
-    const handleTouch = (e: TouchEvent) => {
-      const t = e.touches[0];
-      if (!t) return;
-      const rect = canvas.getBoundingClientRect();
-      const y = t.clientY - rect.top;
-      if (y < 0 || y > rect.height) return;
-      mouse.x = t.clientX - rect.left;
-      mouse.y = y;
-      mouse.lastReal = performance.now();
-    };
-
     const handlePointerLeave = () => {
       mouse.x = -1000;
       mouse.y = -1000;
@@ -197,8 +190,11 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
     const drawFrame = (dt: number, now: number) => {
       const t = now / 1000;
 
-      // Sin cursor (celular o mouse quieto) una "brisa" recorre el lienzo despacio
-      if (now - mouse.lastReal > 2500 && !reduceMotion) {
+      // Con mouse quieto, una "brisa" recorre el lienzo despacio (solo en computadora)
+      if (touchOnly) {
+        mouse.x = -1000;
+        mouse.y = -1000;
+      } else if (now - mouse.lastReal > 2500 && !reduceMotion) {
         mouse.x = width * (0.5 + 0.38 * Math.sin(t * 0.23));
         mouse.y = height * (0.5 + 0.32 * Math.sin(t * 0.31 + 1.2));
       }
@@ -232,8 +228,21 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
           n.vy -= Math.sin(angle) * force * dt;
         }
 
+        if (touchOnly && !reduceMotion) {
+          // caída lenta: el ancla baja y, al salir por abajo, vuelve a entrar por arriba
+          n.baseY += n.fall * dt;
+          if (n.baseY > height + 24) {
+            n.baseY -= height + 48;
+            n.y = n.baseY;
+            n.x = n.baseX;
+            n.vx = 0;
+            n.vy = 0;
+          }
+        }
+
         // el ancla se mece un poco, como si hubiera aire
-        const homeX = n.baseX + Math.sin(t * 0.6 + n.phase) * 4;
+        const sway = touchOnly ? 9 : 4;
+        const homeX = n.baseX + Math.sin(t * (touchOnly ? 0.4 : 0.6) + n.phase) * sway;
         const homeY = n.baseY + Math.cos(t * 0.5 + n.phase) * 3;
         n.vx += (homeX - n.x) * SPRING_K * dt;
         n.vy += (homeY - n.y) * SPRING_K * dt;
@@ -245,7 +254,7 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
         // el pétalo gira y se voltea según qué tan rápido lo empujan
         const v = Math.abs(n.vx) + Math.abs(n.vy);
         n.angle += (n.spin + n.vx * 0.04) * dt;
-        n.flip += dt * (0.7 + v * 0.35);
+        n.flip += dt * ((touchOnly ? 0.5 : 0.7) + v * 0.35);
 
         const near = dist < radius ? 1 : 0;
         n.glow += (near - n.glow) * Math.min(1, dt * 6);
@@ -296,18 +305,16 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
     // solo anima mientras el hero está en pantalla
     const io = new IntersectionObserver(([entry]) => (entry.isIntersecting ? start() : stop()));
     io.observe(host);
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
-    window.addEventListener('touchstart', handleTouch, { passive: true });
-    window.addEventListener('touchmove', handleTouch, { passive: true });
-    document.addEventListener('pointerleave', handlePointerLeave);
+    if (!touchOnly) {
+      window.addEventListener('pointermove', handlePointerMove, { passive: true });
+      document.addEventListener('pointerleave', handlePointerLeave);
+    }
 
     return () => {
       stop();
       ro.disconnect();
       io.disconnect();
       window.removeEventListener('pointermove', handlePointerMove);
-      window.removeEventListener('touchstart', handleTouch);
-      window.removeEventListener('touchmove', handleTouch);
       document.removeEventListener('pointerleave', handlePointerLeave);
     };
   }, [spacing]);
