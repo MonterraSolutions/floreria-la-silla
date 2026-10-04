@@ -157,8 +157,11 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
     };
 
     const handleResize = () => {
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
       const rect = host.getBoundingClientRect();
+      // Safari cambia el alto al esconder su barra mientras haces scroll: si el ancho
+      // no cambió y el alto apenas, no se recrea nada (recrear era lo que trababa)
+      if (petals.length && Math.abs(rect.width - width) < 1 && Math.abs(rect.height - height) < 160) return;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = rect.width;
       height = rect.height;
       canvas.width = Math.round(width * dpr);
@@ -281,7 +284,13 @@ export default function PetalConstellation({ className, spacing }: PetalConstell
 
     };
 
+    // en celular basta con 30 cuadros por segundo: el movimiento es lento y libera al scroll
+    const minFrame = touchOnly ? 1000 / 30 - 2 : 0;
     const render = (now: number) => {
+      if (now - lastTime < minFrame) {
+        animationFrameId = requestAnimationFrame(render);
+        return;
+      }
       const dt = Math.min((now - lastTime) / 1000, 0.05);
       lastTime = now;
       drawFrame(dt, now);

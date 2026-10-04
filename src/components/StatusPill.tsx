@@ -6,7 +6,7 @@ export function StatusPill({ className, withDelivery = false }: { className?: st
   return (
     <span
       className={cn(
-        'inline-flex items-center gap-2 rounded-full bg-paper/75 px-3.5 py-1.5 text-[0.78rem] font-normal text-ink-soft ring-1 ring-ink/10 backdrop-blur',
+        'inline-flex items-center gap-2 rounded-full bg-paper/90 px-3.5 py-1.5 text-[0.78rem] font-normal text-ink-soft ring-1 ring-ink/10',
         className,
       )}
     >

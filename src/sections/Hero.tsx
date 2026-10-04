@@ -21,7 +21,7 @@ export function Hero({ play }: { play: boolean }) {
   return (
     <section
       id="inicio"
-      className="relative isolate flex min-h-dvh items-center overflow-hidden bg-[radial-gradient(ellipse_70%_60%_at_50%_45%,#fff7f6_0%,transparent_70%)] bg-blush pt-28 pb-24 md:pt-32"
+      className="relative isolate flex min-h-svh items-center overflow-hidden bg-[radial-gradient(ellipse_70%_60%_at_50%_45%,#fff7f6_0%,transparent_70%)] bg-blush pt-28 pb-24 md:pt-32"
     >
       <PetalConstellation />
 
@@ -59,7 +59,7 @@ export function Hero({ play }: { play: boolean }) {
           </a>
           <a
             href="#arreglos"
-            className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-paper/70 px-6 text-[0.92rem] font-normal tracking-wide text-ink ring-1 ring-ink/15 backdrop-blur transition hover:ring-ink/40"
+            className="group inline-flex min-h-12 items-center gap-2 rounded-full bg-paper/85 px-6 text-[0.92rem] font-normal tracking-wide text-ink ring-1 ring-ink/15 transition hover:ring-ink/40"
           >
             Ver arreglos
             <ArrowUpRight className="size-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
