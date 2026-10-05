@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Phone, X } from 'lucide-react'
 import { InstagramIcon, WhatsAppIcon } from '@/components/icons'
@@ -14,17 +14,6 @@ const ACTIONS = [
 /** Botón flotante: se abre en abanico con WhatsApp, llamada e Instagram. */
 export function FloatingContact({ visible }: { visible: boolean }) {
   const [open, setOpen] = useState(false)
-  const [hint, setHint] = useState(false)
-
-  useEffect(() => {
-    if (!visible) return
-    const show = window.setTimeout(() => setHint(true), 7000)
-    const hide = window.setTimeout(() => setHint(false), 14000)
-    return () => {
-      window.clearTimeout(show)
-      window.clearTimeout(hide)
-    }
-  }, [visible])
 
   if (!visible) return null
 
@@ -55,29 +44,13 @@ export function FloatingContact({ visible }: { visible: boolean }) {
       </AnimatePresence>
 
       <div className="flex items-center gap-3">
-        <AnimatePresence>
-          {hint && !open && (
-            <motion.span
-              initial={{ opacity: 0, x: 10 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 10 }}
-              className="hidden rounded-2xl rounded-br-sm bg-paper px-4 py-2.5 text-sm text-ink shadow-lg ring-1 ring-ink/5 sm:block"
-            >
-              ¿Te ayudamos a escoger?
-            </motion.span>
-          )}
-        </AnimatePresence>
         <button
           type="button"
-          onClick={() => {
-            setOpen((o) => !o)
-            setHint(false)
-          }}
-          className="relative grid size-14 cursor-pointer place-items-center rounded-full bg-ink text-paper ring-2 ring-paper/70 shadow-[0_12px_30px_-8px_rgba(23,20,20,0.5)] transition hover:bg-rose"
+          onClick={() => setOpen((o) => !o)}
+          className="relative grid size-14 cursor-pointer place-items-center rounded-full bg-ink text-paper shadow-lg transition hover:bg-rose"
           aria-label={open ? 'Cerrar opciones de contacto' : 'Abrir opciones de contacto'}
           aria-expanded={open}
         >
-          {!open && <span className="absolute inset-0 animate-ping rounded-full bg-rose/30 [animation-duration:2.6s]" />}
           <motion.span key={open ? 'x' : 'wa'} initial={{ rotate: -45, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }}>
             {open ? <X className="size-6" /> : <WhatsAppIcon className="size-6" />}
           </motion.span>

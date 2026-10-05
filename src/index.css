@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  --color-paper: #fffbfa;
-  --color-blush-50: #fdf5f4;
-  --color-blush: #f9e3e2;
-  --color-blush-200: #f2d0ce;
-  --color-petal: #d99a9c;
-  --color-rose: #a23b4d;
-  --color-rose-deep: #7d2738;
-  --color-ink: #171414;
-  --color-ink-soft: #3a3232;
-  --color-stone: #6b5d5d;
+  --color-paper: #f8f4ee;
+  --color-blush-50: #f1ebe2;
+  --color-blush: #e7ded1;
+  --color-blush-200: #d9ccba;
+  --color-petal: #c9a983;
+  --color-rose: #6e2233;
+  --color-rose-deep: #4f1824;
+  --color-ink: #1b1816;
+  --color-ink-soft: #3a3430;
+  --color-stone: #6e655c;
 
   /* tokens que esperan los componentes shadcn */
   --color-background: var(--color-paper);
@@ -19,9 +19,9 @@
   --color-muted-foreground: var(--color-stone);
   --color-border: color-mix(in oklab, var(--color-ink) 12%, transparent);
 
-  --font-display: "Italiana", "Didot", serif;
-  --font-serif: "Instrument Serif", "Georgia", serif;
-  --font-sans: "Jost", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Prata", "Georgia", serif;
+  --font-serif: "Prata", "Georgia", serif;
+  --font-sans: "Nunito Sans", ui-sans-serif, system-ui, sans-serif;
 
   --ease-petal: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -65,25 +65,6 @@ body.is-locked {
   outline: 2px solid var(--color-rose);
   outline-offset: 3px;
   border-radius: 4px;
-}
-
-/* cejilla de sección: número + nombre */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--color-rose);
-}
-.eyebrow::before {
-  content: "";
-  width: 2rem;
-  height: 1px;
-  background: currentColor;
 }
 
 /* ===== INTRO ===== */
@@ -180,3 +161,4 @@ body.is-locked {
   .intro-shine { display: none; }
   .animate-marquee { animation: none; }
 }
+

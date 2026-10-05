@@ -11,7 +11,6 @@ export function StatusPill({ className, withDelivery = false }: { className?: st
       )}
     >
       <span className="relative flex size-2">
-        {s.open && <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/70" />}
         <span className={cn('relative inline-flex size-2 rounded-full', s.open ? 'bg-emerald-600' : 'bg-stone/60')} />
       </span>
       {s.label}

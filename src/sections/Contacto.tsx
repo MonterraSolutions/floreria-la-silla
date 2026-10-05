@@ -16,7 +16,7 @@ export function Contacto() {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 md:px-8 lg:grid-cols-[1fr_1fr] lg:gap-16">
         {/* mapa */}
         <Reveal className="order-last lg:order-first">
-          <div className="overflow-hidden rounded-[1.75rem] ring-1 ring-ink/10">
+          <div className="overflow-hidden rounded-md ring-1 ring-ink/10">
             <iframe
               title="Mapa de Florería La Silla"
               src={`https://www.google.com/maps?q=${encodeURIComponent(SITE.mapsQuery)}&output=embed`}
@@ -29,9 +29,8 @@ export function Contacto() {
 
         <div>
           <Reveal>
-            <span className="eyebrow">Contacto</span>
-            <h2 className="mt-5 font-display text-[clamp(2.4rem,5.2vw,4.2rem)] leading-[1] text-ink">
-              Visítanos o <span className="font-serif text-rose italic">escríbenos</span>
+            <h2 className="font-display text-[clamp(2.4rem,5.2vw,4.2rem)] leading-[1] text-ink">
+              Contacto
             </h2>
             <p className="mt-5 max-w-lg text-[1.02rem] leading-relaxed text-stone">
               Pide por WhatsApp, llámanos o pasa a la tienda a escoger tus flores.
@@ -39,7 +38,7 @@ export function Contacto() {
           </Reveal>
 
           <Reveal delay={0.1} className="mt-8 grid gap-3 sm:grid-cols-2">
-            <a href={wa()} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 rounded-2xl bg-ink p-4 text-paper transition hover:bg-rose sm:col-span-2">
+            <a href={wa()} target="_blank" rel="noopener noreferrer" className="group flex items-center gap-4 rounded-md bg-ink p-4 text-paper transition hover:bg-rose sm:col-span-2">
               <span className="grid size-11 shrink-0 place-items-center rounded-full bg-paper/10">
                 <WhatsAppIcon className="size-5" />
               </span>
@@ -49,21 +48,21 @@ export function Contacto() {
               </span>
               <ArrowUpRight className="size-5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </a>
-            <a href={SITE.phoneHref} className="flex items-center gap-3.5 rounded-2xl bg-blush-50 p-4 ring-1 ring-ink/5 transition hover:ring-rose/40">
+            <a href={SITE.phoneHref} className="flex items-center gap-3.5 rounded-md bg-blush-50 p-4 ring-1 ring-ink/5 transition hover:ring-rose/40">
               <Phone className="size-5 shrink-0 text-rose" strokeWidth={1.5} />
               <span>
                 <span className="block text-[0.8rem] text-stone">Teléfono</span>
                 <span className="block text-lg font-light tracking-wide text-ink">{SITE.phone}</span>
               </span>
             </a>
-            <a href={`mailto:${SITE.email}`} className="flex items-center gap-3.5 rounded-2xl bg-blush-50 p-4 ring-1 ring-ink/5 transition hover:ring-rose/40">
+            <a href={`mailto:${SITE.email}`} className="flex items-center gap-3.5 rounded-md bg-blush-50 p-4 ring-1 ring-ink/5 transition hover:ring-rose/40">
               <Mail className="size-5 shrink-0 text-rose" strokeWidth={1.5} />
               <span className="min-w-0">
                 <span className="block text-[0.8rem] text-stone">Correo</span>
                 <span className="block truncate text-[0.95rem] text-ink">{SITE.email}</span>
               </span>
             </a>
-            <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3.5 rounded-2xl bg-blush-50 p-4 ring-1 ring-ink/5 transition hover:ring-rose/40 sm:col-span-2">
+            <a href={mapsHref} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3.5 rounded-md bg-blush-50 p-4 ring-1 ring-ink/5 transition hover:ring-rose/40 sm:col-span-2">
               <MapPin className="size-5 shrink-0 text-rose" strokeWidth={1.5} />
               <span className="flex-1">
                 <span className="block text-[0.95rem] text-ink">{SITE.address}</span>

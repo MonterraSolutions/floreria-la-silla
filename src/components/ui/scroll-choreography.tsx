@@ -91,7 +91,7 @@ export function ScrollChoreography({ className, images, overlay }: ScrollChoreog
       <div className={cn("relative w-full", className)}>
         <div className="grid grid-cols-2 gap-3 px-4 md:px-10">
           {[images.topLeft, images.topRight, images.bottomLeft, images.bottomRight].map((img) => (
-            <img key={img.src} src={img.src} alt={img.alt} loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+            <img key={img.src} src={img.src} alt={img.alt} loading="lazy" className="aspect-[4/3] w-full rounded-md object-cover" />
           ))}
         </div>
         {overlay && <div className="relative mt-8 px-4 md:px-10">{overlay}</div>}

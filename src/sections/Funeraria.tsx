@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { WhatsAppIcon } from '@/components/icons'
 import { Reveal } from '@/components/Reveal'
 import { ThumbnailGallery } from '@/components/ui/thumbnail-gallery'
-import { SITE, wa } from '@/lib/site'
+import { wa } from '@/lib/site'
 
 const PIEZAS = [
   { img: 'corona-blanca', name: 'Corona blanca', note: 'Rosas blancas con centro de hortensia' },
@@ -35,19 +35,7 @@ export function Funeraria() {
       <div className="mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <Reveal>
-            <span className="eyebrow !text-petal">Funeraria</span>
-            <h2 className="mt-5 font-display text-[clamp(2.4rem,5.2vw,4.2rem)] leading-[1]">
-              Coronas y <span className="font-serif text-petal italic">condolencias</span>
-            </h2>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <p className="max-w-sm text-[1.02rem] leading-relaxed text-paper/70">
-              Las llevamos directo a la funeraria o al templo, con el listón que tú nos digas. Si es urgente, llámanos al{' '}
-              <a href={SITE.phoneHref} className="whitespace-nowrap text-blush underline underline-offset-4">
-                {SITE.phone}
-              </a>
-              .
-            </p>
+            <h2 className="font-display text-[clamp(2.4rem,5vw,4rem)] leading-[1.02]">Coronas y arreglos de condolencias</h2>
           </Reveal>
         </div>
 
@@ -63,8 +51,8 @@ export function Funeraria() {
 
           {/* gadget: escribe el listón */}
           <Reveal delay={0.1}>
-            <div className="rounded-[1.75rem] bg-ink-soft/60 p-5 ring-1 ring-paper/10 sm:p-7">
-              <div className="relative flex h-40 items-center justify-center overflow-hidden rounded-2xl bg-[radial-gradient(ellipse_at_center,#2b2424_0%,#171414_75%)]" aria-hidden="true">
+            <div className="rounded-md bg-ink-soft/60 p-5 ring-1 ring-paper/10 sm:p-7">
+              <div className="relative flex h-40 items-center justify-center overflow-hidden rounded-md bg-[radial-gradient(ellipse_at_center,#2b2424_0%,#171414_75%)]" aria-hidden="true">
                 <motion.span key={pieza} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="absolute top-4 text-[0.68rem] tracking-[0.3em] text-paper/45 uppercase">
                   {pieza}
                 </motion.span>
@@ -81,9 +69,9 @@ export function Funeraria() {
               </div>
 
               <h3 className="mt-6 font-display text-[1.9rem] leading-none">
-                Escribe el <span className="font-serif text-petal italic">listón</span>
+                Texto del listón
               </h3>
-              <p className="mt-2 text-[0.9rem] text-paper/60">Te abrimos WhatsApp con el pedido ya escrito.</p>
+              <p className="mt-2 text-[0.9rem] text-paper/60">Escoge la pieza, escribe el texto y envía el pedido por WhatsApp.</p>
 
               <div className="mt-5 grid gap-4">
                 <label htmlFor={ids.pieza} className="sr-only">
@@ -116,7 +104,7 @@ export function Funeraria() {
                   href={wa(mensaje)}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-1 inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-paper px-7 text-[0.95rem] font-normal text-ink transition hover:bg-blush"
+                  className="mt-1 inline-flex min-h-12 items-center justify-center gap-2.5 rounded-sm bg-paper px-7 text-[0.95rem] font-normal text-ink transition hover:bg-blush"
                 >
                   <WhatsAppIcon className="size-[1.1rem]" />
                   Enviar pedido por WhatsApp
