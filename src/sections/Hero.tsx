@@ -26,7 +26,7 @@ export function Hero({ play }: { play: boolean }) {
       {/* oscurece abajo y a la izquierda para que el texto se lea sin tapar el ramo */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(20,16,14,0.9)_0%,rgba(20,16,14,0.55)_50%,rgba(20,16,14,0.2)_100%)] md:bg-[linear-gradient(to_right,rgba(20,16,14,0.88)_0%,rgba(20,16,14,0.6)_40%,rgba(20,16,14,0.1)_70%)]"
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(28,28,32,0.9)_0%,rgba(28,28,32,0.55)_50%,rgba(28,28,32,0.2)_100%)] md:bg-[linear-gradient(to_right,rgba(28,28,32,0.88)_0%,rgba(28,28,32,0.6)_40%,rgba(28,28,32,0.1)_70%)]"
       />
 
       <div className="mx-auto w-full max-w-7xl px-4 pt-32 pb-16 md:px-8 md:pb-24">
